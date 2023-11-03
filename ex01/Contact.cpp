@@ -6,18 +6,19 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 04:29:22 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/03 01:00:50 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/03 03:26:41 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-static void print_truncated(std::string original, int width)
+static void print_truncated(std::string original, long unsigned int width)
 {
-	std::cout << std::setw(width) << std::right;
+	std::cout << std::right;
 	if (original.length() > width)
 		std::cout << original.substr(0, width - 1) << '.';
-	std::cout << original;
+	else
+		std::cout << std::setw(width) << original;
 }
 
 Contact::Contact() : first_name(""), last_name(""),
@@ -41,15 +42,15 @@ void Contact::print_full(void)
 	std::cout << "Last name: " << this->last_name << '\n';
 	std::cout << "Nickname: " << this->nickname << '\n';
 	std::cout << "Phone number: " << this->phone_number << '\n';
-	std::cout << "First name: " << this->first_name << '\n';
-	std::cout << "Darkest secret: " << this->darkest_secret << std::endl;
+	std::cout << "Darkest secret: " << this->darkest_secret << '\n';
+	std::cout << std::endl;
 }
 
-void Contact::print_summary(void)
+void Contact::print_summary(int index)
 {
-	const int width = 10;
+	const long unsigned int width = 10;
 
-	std::cout << std::setw(width) << std::right << this->index << '|';
+	std::cout << std::setw(width) << std::right << index << '|';
 	print_truncated(this->first_name, width);
 	std::cout << '|';
 	print_truncated(this->last_name, width);

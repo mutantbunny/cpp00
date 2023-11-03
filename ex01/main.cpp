@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:58:42 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/03 00:57:58 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/03 03:26:58 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int handle_input_error()
 	return 0;
 }
 
-static int get_contact(PhoneBook book)
+static int get_contact(PhoneBook &book)
 {
 	std::string first_name;
 	std::string last_name;
@@ -39,28 +39,29 @@ static int get_contact(PhoneBook book)
 	std::string phone_number;
 	std::string darkest_secret;
 
-	std::cout << "Enter first name:\n";
+	std::cout << "Enter first name: ";
 	std::cin >> first_name;
-	if(handle_input_error())
+	if(handle_input_error() || first_name == "")
 		return 1;
-	std::cout << "Enter last name:\n";
+	std::cout << "Enter last name: ";
 	std::cin >> last_name;
-	if(handle_input_error())
+	if(handle_input_error() || last_name == "")
 		return 1;
-	std::cout << "Enter nickname:\n";
+	std::cout << "Enter nickname: ";
 	std::cin >> nickname;
-	if(handle_input_error())
+	if(handle_input_error() || nickname == "")
 		return 1;
-	std::cout << "Enter phone number:\n";
+	std::cout << "Enter phone number: ";
 	std::cin >> phone_number;
-	if(handle_input_error())
+	if(handle_input_error() || phone_number == "")
 		return 1;
-	std::cout << "Enter darkest secret:\n";
+	std::cout << "Enter darkest secret: ";
 	std::cin >> darkest_secret;
-	if(handle_input_error())
+	if(handle_input_error() || darkest_secret == "")
 		return 1;
 	book.add_contact(first_name, last_name, nickname,
 		phone_number, darkest_secret);
+	std::cout << "Contact added.\n";
 	return 0;
 }
 
@@ -68,12 +69,12 @@ static void search_contact(PhoneBook& book)
 {
 	int idx;
 
-	std::cout << "Saved contacts:\n";
-	book.print_contacts();
-	std::cout << "Enter contact index to show more information:\n";
+	if (book.print_contacts())
+		return;
+	std::cout << "Enter contact index to show more information: ";
 	std::cin >> idx;
 	if (handle_input_error() || book.print_contact(idx))
-		std::cout << "Error: Invalid index." << std::endl;
+		std::cout << "Invalid index." << std::endl;
 }
 
 int main(void)
@@ -83,7 +84,7 @@ int main(void)
 
 	while (true)
 	{
-		std::cout << "Enter command (ADD, SEARCH, EXIT):\n";
+		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
 		std::cin >> response;
 		if(handle_input_error())
 		{
@@ -91,7 +92,13 @@ int main(void)
 			continue;
 		}
 		if (response == "ADD")
-			get_contact(book);
+		{
+			if (get_contact(book))
+			{
+			std::cout << "Invalid input." << std::endl;
+			continue;
+			}
+		}
 		else if (response == "SEARCH")
 			search_contact(book);
 		else if (response == "EXIT")

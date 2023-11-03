@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 04:29:20 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/03 01:06:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/03 02:12:16 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 class Contact
 {
 	private:
-		int index;
 		std::string first_name;
 		std::string last_name;
 		std::string nickname;
@@ -31,7 +30,7 @@ class Contact
 		Contact();
 
 		void print_full(void);
-		void print_summary(void);
+		void print_summary(int index);
 		void set(std::string first_name, std::string last_name,
 			std::string nickname, std::string phone_number,
 			std::string darkest_secret);

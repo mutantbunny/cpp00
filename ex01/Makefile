@@ -1,5 +1,5 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CC = g++
+CFLAGS = -Wall -Wextra -Werror -ggdb -std=c++98
 RM = rm -f
 
 NAME = phonebook
@@ -12,10 +12,10 @@ INCS = Contact.hpp PhoneBook.hpp
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCS)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: $(SRCS)
+%.o: %.cpp $(INCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

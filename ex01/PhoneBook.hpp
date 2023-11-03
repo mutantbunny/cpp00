@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 04:29:17 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/03 01:08:10 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/03 03:27:11 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class PhoneBook
 			std::string nickname, std::string phone_number,
 			std::string darkest_secret);
 		int print_contact(int index);
-		void print_contacts(void);
+		int print_contacts(void);
 };
 
 #endif

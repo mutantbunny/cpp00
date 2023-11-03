@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 04:29:15 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/03 00:44:50 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/03 02:34:07 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,23 @@ void PhoneBook::add_contact(std::string first_name, std::string last_name,
 	++(this->next_contact);
 }
 
-void PhoneBook::print_contacts(void)
+int PhoneBook::print_contacts(void)
 {
 	const int max_saved(this->next_contact <= MAX_CONTACTS ?
 		this->next_contact : MAX_CONTACTS);
-
+	if (max_saved <= 0)
+	{
+		std::cout << "Phone book is empty\n";
+		return 1;
+	}
 	std::cout << "Saved contacts:\n";
-	std::cout << "---------------\n";
+	std::cout << "-------------------------------------------\n";
+	std::cout << "     Index|  1st Name| Last Name|  Nickname\n";
+	std::cout << "-------------------------------------------\n";
 	for (int i = 0; i < max_saved; ++i)
-		this->contacts[i].print_summary();
-	std::cout << "---------------" << std::endl;
+		this->contacts[i].print_summary(i);
+	std::cout << "-------------------------------------------" << std::endl;
+	return 0;
 }
 
 int PhoneBook::print_contact(int index)
