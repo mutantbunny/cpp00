@@ -1,25 +1,27 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CC = g++
+CFLAGS = -Wall -Wextra -Werror -ggdb -std=c++98
 RM = rm -f
 
-NAME = megaphone
+NAME = tests
 
-SRCS = megaphone.cpp
+SRCS = tests.cpp Account.cpp
 
 OBJS = $(SRCS:.cpp=.o)
+
+INCS = Account.hpp
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJS):%.o: $(SRCS)
+%.o: %.cpp $(INCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	RM $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	RM $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
