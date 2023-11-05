@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:58:42 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/04 04:42:06 by gmachado         ###   ########.fr       */
+/*   Updated: 2023/11/05 01:21:58 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int handle_input_error()
 		if (std::cin.eof())
 		{
 			std::cout << "Error: Stream closed, unable to continue!" << std::endl;
-			std::abort();
+			std::exit(1);
 		}
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
