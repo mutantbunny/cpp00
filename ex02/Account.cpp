@@ -35,6 +35,8 @@ Account::Account(int initial_deposit)
 				<< ";created" << std::endl;
 }
 
+Account::Account(void): Account(0) { }
+
 Account::~Account(void)
 {
 	_displayTimestamp();
