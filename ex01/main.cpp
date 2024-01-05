@@ -20,7 +20,7 @@ static int handle_input_error()
 		if (std::cin.eof())
 		{
 			std::cout << "Error: Stream closed, unable to continue!" << std::endl;
-			std::exit(1);
+			return 2;
 		}
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -30,6 +30,18 @@ static int handle_input_error()
 	return 0;
 }
 
+static int get_line(std::string &str)
+{
+	int err;
+
+	std::cin >> str;
+	err = handle_input_error();
+	if (err)
+		return err;
+	if(str == "")
+		return 1;
+	return 0;
+}
 static int get_contact(PhoneBook &book)
 {
 	std::string first_name;
@@ -37,69 +49,89 @@ static int get_contact(PhoneBook &book)
 	std::string nickname;
 	std::string phone_number;
 	std::string darkest_secret;
+	int err;
 
 	std::cout << "Enter first name: ";
-	std::cin >> first_name;
-	if(handle_input_error() || first_name == "")
-		return 1;
+	err = get_line(first_name);
+	if(err)
+		return err;
 	std::cout << "Enter last name: ";
-	std::cin >> last_name;
-	if(handle_input_error() || last_name == "")
-		return 1;
+	err = get_line(last_name);
+	if(err)
+		return err;
 	std::cout << "Enter nickname: ";
-	std::cin >> nickname;
-	if(handle_input_error() || nickname == "")
-		return 1;
+	err = get_line(nickname);
+	if(err)
+		return err;
 	std::cout << "Enter phone number: ";
-	std::cin >> phone_number;
-	if(handle_input_error() || phone_number == "")
-		return 1;
+	err = get_line(phone_number);
+	if(err)
+		return err;
 	std::cout << "Enter darkest secret: ";
-	std::cin >> darkest_secret;
-	if(handle_input_error() || darkest_secret == "")
-		return 1;
+	err = get_line(last_name);
+	if(err)
+		return err;
 	book.add_contact(first_name, last_name, nickname,
 		phone_number, darkest_secret);
 	std::cout << "Contact added.\n";
 	return 0;
 }
 
-static void search_contact(PhoneBook& book)
+static int search_contact(PhoneBook& book)
 {
 	int idx;
+	int err;
 
 	if (book.print_contacts())
-		return;
+		return 1;
 	std::cout << "Enter contact index to show more information: ";
 	std::cin >> idx;
-	if (handle_input_error() || book.print_contact(idx))
+	err = handle_input_error();
+	if (err)
+		return err;
+	if (book.print_contact(idx))
+	{
 		std::cout << "Invalid index." << std::endl;
+		return 1;
+	}
+	return 0;
 }
 
 int main(void)
 {
 	std::string response;
-	PhoneBook	book;
+	PhoneBook book;
+	int err;
 
 	while (true)
 	{
 		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
 		std::cin >> response;
-		if(handle_input_error())
+		err = handle_input_error();
+		if (err == 2)
+			return(2);
+		if(err)
 		{
 			std::cout << "Invalid command." << std::endl;
 			continue;
 		}
 		if (response == "ADD")
 		{
-			if (get_contact(book))
+			err = get_contact(book);
+			if (err == 2)
+				return(2);
+			if (err)
 			{
-			std::cout << "Invalid input." << std::endl;
-			continue;
+				std::cout << "Invalid input." << std::endl;
+				continue;
 			}
 		}
 		else if (response == "SEARCH")
-			search_contact(book);
+		{
+			err = search_contact(book);
+			if (err == 2)
+				return(2);
+		}
 		else if (response == "EXIT")
 			break;
 		else

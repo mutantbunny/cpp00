@@ -12,7 +12,7 @@
 
 #include "Contact.hpp"
 
-static void print_truncated(std::string original, long unsigned int width)
+void Contact::print_truncated(std::string original, long unsigned int width)
 {
 	std::cout << std::right;
 	if (original.length() > width)
@@ -51,10 +51,10 @@ void Contact::print_summary(int index)
 	const long unsigned int width = 10;
 
 	std::cout << std::setw(width) << std::right << index << '|';
-	print_truncated(this->first_name, width);
+	Contact::print_truncated(this->first_name, width);
 	std::cout << '|';
-	print_truncated(this->last_name, width);
+	Contact::print_truncated(this->last_name, width);
 	std::cout << '|';
-	print_truncated(this->nickname, width);
+	Contact::print_truncated(this->nickname, width);
 	std::cout << std::endl;
 }
