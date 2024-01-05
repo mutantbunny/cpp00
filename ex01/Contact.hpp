@@ -26,6 +26,8 @@ class Contact
 		std::string phone_number;
 		std::string darkest_secret;
 
+		static void print_truncated(std::string original, long unsigned int width);
+
 	public:
 		Contact();
 
