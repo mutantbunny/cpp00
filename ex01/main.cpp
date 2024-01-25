@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:58:42 by gmachado          #+#    #+#             */
-/*   Updated: 2024/01/24 22:51:39 by gmachado         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:06:46 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int handle_input_error()
 	{
 		if (std::cin.eof())
 		{
-			std::cout << "Error: Stream closed, unable to continue!" << std::endl;
+			std::cout << "\nError: Stream closed, unable to continue!" << std::endl;
 			return 2;
 		}
 		std::cin.clear();
