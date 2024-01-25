@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:58:42 by gmachado          #+#    #+#             */
-/*   Updated: 2023/11/05 01:21:58 by gmachado         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:51:39 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int get_contact(PhoneBook &book)
 	if(err)
 		return err;
 	std::cout << "Enter darkest secret: ";
-	err = get_line(last_name);
+	err = get_line(darkest_secret);
 	if(err)
 		return err;
 	book.add_contact(first_name, last_name, nickname,
