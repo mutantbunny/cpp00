@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -ggdb -std=c++98
 RM = rm -f
 

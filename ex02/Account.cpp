@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 05:52:44 by coelho            #+#    #+#             */
-/*   Updated: 2024/01/05 05:53:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:14:34 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,17 @@ Account::Account(int initial_deposit)
 				<< ";created" << std::endl;
 }
 
-Account::Account(void): Account(0) { }
+Account::Account(void)
+{
+	_accountIndex = _nbAccounts++;
+	_amount = 0;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex
+				<< ";amount:" <<_amount
+				<< ";created" << std::endl;
+}
 
 Account::~Account(void)
 {
